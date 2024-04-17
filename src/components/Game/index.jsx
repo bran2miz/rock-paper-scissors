@@ -10,22 +10,26 @@ const Game = () => {
     const dispatch = useDispatch();
 
     const handleClick = (e) => {
-        dispatch(gameSlice.actions.shoot(e.target.name))
+        dispatch(gameSlice.actions.shoot({player:e.target.name}))
+    }
+
+    const handleReset = () => {
+        //dispatch some reset action
+        dispatch(gameSlice.actions.reset())
     }
 
   return (
     <div style={{marginTop: "16px"}}>
         <Card style={{width: "400px", margin:"auto"}}>
-            <ButtonGroup fullWidth>
-                <Button variant="contained" onClick={handleClick} name="rock">Rock</Button>
-                <Button variant="contained" onClick={handleClick} name="paper">Paper</Button>
-                <Button variant="contained" onClick={handleClick} name="scissors">Scissors</Button>
-            </ButtonGroup>
-            <CardContent>
-                <Typography variant="h5">Player Throws:{game.playerThrow}</Typography>
-                <Typography variant="h5">Computer Throws:{game.computerThrow}</Typography>
-                <Typography variant="h5">Rounds:{game.shoots}</Typography>
-                <Typography variant="h5">Player Wins:{game.playerWins}</Typography>
+        <CardContent>
+            {game.done ? (<Button onClick={handleReset} variant="contained" fullWidth>Play Again ?</Button>):(
+            <><ButtonGroup fullWidth variant="contained"
+                          disabled={game.done}
+                      >
+                          <Button variant="contained" onClick={handleClick} name="rock">Rock</Button>
+                          <Button variant="contained" onClick={handleClick} name="paper">Paper</Button>
+                          <Button variant="contained" onClick={handleClick} name="scissors">Scissors</Button>
+                      </ButtonGroup><Typography variant="h5">Player Throws:{game.playerThrow}</Typography><Typography variant="h5">Computer Throws:{game.computerThrow}</Typography><Typography variant="h5">Rounds:{game.shoots}</Typography><Typography variant="h5">Player Wins:{game.playerWins}</Typography></>)}
             </CardContent>
         </Card>
     </div>

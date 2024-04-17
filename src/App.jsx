@@ -1,5 +1,6 @@
 import Header from "./components/Header";
 import Game from "./components/Game";
+import Campaign from "./components/Campaign";
 
 
 function App() {
@@ -7,6 +8,7 @@ function App() {
 <div>
   <Header />
   <Game />
+  <Campaign />
 </div>
   )
 }

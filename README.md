@@ -1,4 +1,14 @@
-# Notes:
+# Rock 🪨 Paper 📝 Scissors ✂️
+
+## Author: Brandon Mizutani
+
+## Version: 1.0.0
+
+### Overview
+
+Simple rock paper scissors game that uses rtk (redux tool kit). A store is created with two slices that handles the game and campaign.
+
+### Notes:
 
 example:
 
@@ -18,6 +28,14 @@ CAMPAIGN -- total games played
 
 total player wins
 
+Campaign state:
+state:
+totalGames:
+totalPlayerwWins:
+
+updateGames:
+when game hits "done" state call this action pass player wins
+
 **game state**:
 playerShoot:
 computerShoot:
@@ -31,3 +49,4 @@ shoot
     - did the player win
     - updates shoots
     - consider a tie
+

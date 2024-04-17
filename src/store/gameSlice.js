@@ -6,18 +6,20 @@ const gameSlice = createSlice({
         playerThrow: undefined,
         computerThrow: undefined,
         shoots: 0,
-        playerWins: 0
+        playerWins: 0,
+        done: false
     },
     reducers: {
         shoot: (state, action) => {
-            const player = action.payload;
-            const computer = generateThrow();
+            const player = action.payload.player;
+            const computer = action.payload.computer || generateThrow();
             state.playerThrow = player;
             state.computerThrow = computer;
 
 
             if (player !== computer) {
                 // update shots and playerWins (maybe)
+                if (state.shoots === 2 ) state.done = true;
                 state.shoots+=1;
                 // determine winner / did player win
                 const playerWon = evaluatePlayerWin(player, computer);
@@ -26,6 +28,14 @@ const gameSlice = createSlice({
                     state.playerWins+=1;
                 }
             }
+        },
+        reset: (state) => {
+            state.playerThrow= undefined,
+            state.computerThrow= undefined,
+            state.shoots= 0,
+            state.playerWins= 0,
+            state.done= false
+            
         }
     }
 });
@@ -38,7 +48,7 @@ const generateThrow = () => {
     return options[index];
 };
 
-const evaluatePlayerWin = (player,computer) => {
+export const evaluatePlayerWin = (player,computer) => {
     const winConditions = {
         rock: "paper",
         scissors: "rock",
